@@ -12,3 +12,9 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
+
+class String
+  def to_mongo_id
+    BSON::ObjectId.from_string(self)
+  end
+end
