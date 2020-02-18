@@ -1,5 +1,3 @@
-
-
 describe "POST /spots" do
   before(:all) do
     result = SpotApi.new.session({ email: "tiago@cruz.io" })
@@ -77,6 +75,29 @@ describe "POST /spots" do
 
     it "should return required technologies" do
       expect(@result.parsed_response["error"]).to eql "Technologies is required"
+    end
+  end
+
+  context "when empty thumbnail " do
+    before(:all) do
+      thumbnail = File.open(File.join(Dir.pwd, "spec/images", "google.jpg"))
+
+      payload = {
+        thumbnail: "",
+        company: "Java, Node ",
+        techs: "",
+        price: "30",
+      }
+
+      @result = SpotApi.new.save_spot(payload, @user_id)
+    end
+
+    it "should return 412" do
+      expect(@result.response.code).to eql "412"
+    end
+
+    it "should return required technologies" do
+      expect(@result.parsed_response["error"]).to eql "Incorrect Spot data :("
     end
   end
 end

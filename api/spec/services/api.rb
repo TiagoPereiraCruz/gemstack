@@ -33,4 +33,11 @@ class SpotApi
       headers: { "user_id" => user_id },
     )
   end
+
+  def remove_spot(user_id, spot_id)
+    self.class.delete(
+      "/spots/" + spot_id,
+      headers: { "user_id" => user_id },
+    )
+  end
 end

@@ -1,5 +1,5 @@
 describe ("POST /sessions") do
-  context "when send email" do
+  context "when send email", :smoke do
     before(:all) do
       @result = SpotApi.new.session({ email: "tiago@cruz.io" })
     end

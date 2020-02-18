@@ -1,0 +1,4 @@
+---
+default: --format pretty -p json
+html: --format html --out log/report.html
+json: --format json --out log/report.json
